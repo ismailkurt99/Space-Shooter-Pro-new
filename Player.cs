@@ -24,16 +24,17 @@ public class Player: MonoBehaviour
   private bool _isTripleShotActive = false;
   private bool _isSpeedBoostActive = false;
   private bool _isShieldActive = false;
-[SerializeField]
+  [SerializeField]
   private int _score;
   private UIManager _uiManager;
-  
-  
+  [SerializeField]
+
   void Start()
   {
     transform.position = new Vector3(0,-3f,0);
     _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
     _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
     if (_spawnManager == null)
     {
       Debug.Log("The Spawn Manager is null!");
@@ -97,10 +98,8 @@ public class Player: MonoBehaviour
       {
         Instantiate(_tripleLaserPrefab, transform.position, Quaternion.identity);
       }
-    }
-      
-  }
-
+    } 
+  } 
   public void Damage()
   {
     if(_isShieldActive == true)
@@ -110,6 +109,8 @@ public class Player: MonoBehaviour
       return;
     }
       _lives --;
+
+      _uiManager.UpdateLives(_lives);
       if(_lives < 1)
       {
         _spawnManager.onPlayerDeath();
