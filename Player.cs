@@ -28,12 +28,14 @@ public class Player: MonoBehaviour
   private int _score;
   private UIManager _uiManager;
   [SerializeField]
-
+  private GameObject _rightEngine, _leftEngine;
+  private AudioSource _laserAudio;
   void Start()
   {
     transform.position = new Vector3(0,-3f,0);
     _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
     _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+    _laserAudio = GetComponent<AudioSource>();
 
     if (_spawnManager == null)
     {
@@ -98,6 +100,7 @@ public class Player: MonoBehaviour
       {
         Instantiate(_tripleLaserPrefab, transform.position, Quaternion.identity);
       }
+      _laserAudio.Play();
     } 
   } 
   public void Damage()
@@ -109,6 +112,14 @@ public class Player: MonoBehaviour
       return;
     }
       _lives --;
+      if(_lives == 2)
+      {
+        _rightEngine.SetActive(true);
+      }
+      else if(_lives == 1)
+      {
+        _leftEngine.SetActive(true);
+      }
 
       _uiManager.UpdateLives(_lives);
       if(_lives < 1)

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     if(_anim == null)
     {
-      Debug.LogError("animator is null!");
+      Debug.LogError("Enemy animator is null!");
     }
   }
 
