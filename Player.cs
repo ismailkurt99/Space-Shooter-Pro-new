@@ -30,6 +30,8 @@ public class Player: MonoBehaviour
   [SerializeField]
   private GameObject _rightEngine, _leftEngine;
   private AudioSource _laserAudio;
+  [SerializeField]
+  private GameObject _explosionEffect;
   void Start()
   {
     transform.position = new Vector3(0,-3f,0);
@@ -124,6 +126,7 @@ public class Player: MonoBehaviour
       _uiManager.UpdateLives(_lives);
       if(_lives < 1)
       {
+        GameObject newExplosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
         _spawnManager.onPlayerDeath();
         Destroy(this.gameObject);
       }
