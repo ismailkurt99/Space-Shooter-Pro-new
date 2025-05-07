@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
           GameObject newExplosion = Instantiate(_explosionEffect, transform.position, Quaternion.identity);
           _anim.SetTrigger("OnEnemyDeath");
           _speed = 0;
+          _canfire = Time.time + _canfire;
           Destroy(this.gameObject, 2.5f);
         }
         else if (other.tag == "Laser")
@@ -66,6 +67,7 @@ public class Enemy : MonoBehaviour
           _anim.SetTrigger("OnEnemyDeath");
           _speed = 0;
           Destroy(GetComponent<Collider2D>());
+          _canfire = Time.time + _canfire;
           Destroy(this.gameObject, 2.5f);
         }
   }

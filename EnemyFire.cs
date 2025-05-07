@@ -13,7 +13,7 @@ public class EnemyFire : MonoBehaviour
   {
     transform.Translate(Vector3.down * speed * Time.deltaTime);
 
-    if(transform.position.y < 8)
+    if(transform.position.y < -8)
     {
       if(transform.parent != null)
       {
